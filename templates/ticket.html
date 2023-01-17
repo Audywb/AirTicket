@@ -1,0 +1,61 @@
+{% extends "head.html" %}
+{% block title %}จองตั๋วเที่ยวบิน{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h4 class="mt-4 text-promo"><i class="fa-solid fa-plane" id="star-icon"></i> จองตั๋วเที่ยวบิน</h4>
+    {% for flight in flights%}
+    <div class="card mt-2">
+        <h5 class="card-header border-danger">เที่ยวบินแนะนำ</h5>
+        <div class="card-body">
+            <div class="row" id="text-card-body">
+                <div class="col-sm-12 col-md-auto text-center">
+                    <h5>{{ flight['name'] }}</h5>
+                </div>
+                <div class="col text-center">
+                    <h5>{{ flight['start'] }}</h5>
+                </div>
+                <div class="col text-center">
+                    <div class="row">
+                        <div class="col" id="travel-icon">
+                            <i class="fa-solid fa-plane"></i>
+                        </div>
+                        <div class="col col-lg-8 col-md-7 col-sm-5">
+                            <hr style="border: 2px solid;">
+                        </div>
+                        <div class="col" id="travel-icon">
+                            <i class="fa-solid fa-location-pin"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <h5>{{ flight['end'] }}</h5>
+                </div>
+            </div>
+            <div class="text-center" id="text-price">
+                <p>ราคา&nbsp;&nbsp;&nbsp;</p>
+                <!-- <p class="text-decoration-line-through text-muted">1000</p>&nbsp;&nbsp;&nbsp; -->
+                <p>{{ flight['price'] }}฿</p>
+            </div>
+            <div class="text-center" id="text-price">
+                <p>เที่ยวบินวันที่&nbsp;&nbsp;</p>
+                <p class="">{{ flight['flight_date'] }}</p>
+            </div>
+            <div class="text-center" id="text-price">
+                <p>เวลาในการบิน&nbsp;&nbsp;</p>
+                <p>{{ flight['time_fly'] }}&nbsp; ชั่วโมง</p>
+            </div>
+            <div class="text-center">
+                <div class="col">
+                    <a href="{{ url_for('ticeketSelect', id=flight['_id']) }}" class="btn btn-danger">เลือกเที่ยวบินนี้</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted text-center">
+            {{ flight['dayago'] }}
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+</div>
+{% endblock %}

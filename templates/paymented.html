@@ -1,0 +1,48 @@
+{% extends "head.html" %}
+{% block title %}จองตั๋ว{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="alert alert-success mt-2" role="alert">
+        ชำระเงินสำเร็จ ขอบคุณที่ใช้บริการ
+      </div>
+    <h4 class="mt-4 text-promo"><i class="fa-solid fa-plane" id="star-icon"></i> รายละเอียดการจอง</h4>
+    <div class="card mt-2">
+        <h4 class="card-header">ข้อมูลการจอง</h4>
+        <div class="card-body">
+            <p>สายการบิน {{ flight['name'] }} จากสนามบิน {{ flight['start'] }} --> ถึงสนามบิน {{ flight['end'] }}</p>
+            <p>วันที่ {{ flight['flight_date'] }} | ใช้เวลา {{ flight['time_fly'] }} ชั่วโมง</p>
+            <p>หมายเลขการจอง {{ ticket_no }}</p>
+            <p>ชื่อผู้โดยสาร {{ name }}</p>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <h4>ราคาตั๋วผู้ใหญ่</h4>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <h4>{{ "%0.2f" | format(flight.price | int) }}฿</h4>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <h4>ภาษีและค่าธรรมเนียม</h4>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <h4>{{ "%0.2f" | format(flight.price | int*0.07+50) }}฿</h4>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <h4>รวม</h4>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <h4>{{ "%0.2f" | format(flight.price | int+flight.price | int*0.07+50) }}฿</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+{% endblock %}

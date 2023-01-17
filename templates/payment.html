@@ -1,0 +1,78 @@
+{% extends "head.html" %}
+{% block title %}จองตั๋ว{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h4 class="mt-4 text-promo"><i class="fa-solid fa-plane" id="star-icon"></i> เลือกวิธีชำระเงิน</h4>
+    <div class="card mt-2">
+        <h4 class="card-header">ชำระเงิน</h4>
+        <div class="card-body">
+            <form action="/payment/{{flight['_id']}}" method="POST">
+                <div class="mb-3">
+                    <label for="ticketno" class="form-label">หมายเลขการจอง</label>
+                    <input type="number" class="form-control" id="ticketno" placeholder="Ticket no." name="ticketno"
+                        value="{{ticket_no}}" disabled readonly required>
+                </div>
+                <div class="mb-3">
+                    <label for="select">ชำระเงินด้วย</label>
+                    <select class="form-select" aria-label="Default select example" id="select" name="payment" required>
+                        <option selected>บัตรเครดิต</option>
+                        <option value="1">เอทีเอ็ม</option>
+                        <option value="2">เค้าเตอร์ชำระเงิน</option>
+                        <option value="3">อินเทอร์เน็ตแบงค์กิ้ง</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="nameth" class="form-label">ชื่อ-นามสกุล</label>
+                    <input type="text" class="form-control" id="nameth" placeholder="Name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">ที่อยู่อีเมล</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                        placeholder="email@example.com" name="email" required value="{{email}}">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">หมายเลขโทรศัพท์</label>
+                    <input type="text" class="form-control" id="phone" placeholder="Phone number" name="phone" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">ชำระเงิน</button>
+            </form>
+        </div>
+    </div>
+    <div class="card mt-2">
+        <h4 class="card-header">รายละเอียด</h4>
+        <div class="card-body">
+            <p>สายการบิน {{ flight['name'] }} จากสนามบิน {{ flight['start'] }} --> ถึงสนามบิน {{ flight['end'] }}</p>
+            <p>วันที่ {{ flight['flight_date'] }} | ใช้เวลา {{ flight['time_fly'] }} ชั่วโมง</p>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <h4>ราคาตั๋วผู้ใหญ่</h4>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <h4>{{ "%0.2f" | format(flight.price | int) }}฿</h4>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <h4>ภาษีและค่าธรรมเนียม</h4>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <h4>{{ "%0.2f" | format(flight.price | int*0.07+50) }}฿</h4>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <h4>รวม</h4>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <h4>{{ "%0.2f" | format(flight.price | int+flight.price | int*0.07+50) }}฿</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+{% endblock %}

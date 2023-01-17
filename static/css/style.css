@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Chonburi&family=Itim&display=swap');
+
+
+.body {
+  font-family: 'Itim', cursive;
+  background-color: #ff1616;
+}
+
+#navbar {
+  background-color: #ff1616;
+  font-family: 'Chonburi', cursive;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+#navbar2 {
+  background-color: white;
+  font-family: 'Itim', cursive;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+/* Style the navigation menu */
+.navbar2 {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  overflow: auto;
+}
+
+/* Navigation links */
+.navbar2 a {
+  float: left;
+  padding: 12px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 22px;
+  width: 33.33%;
+  /* Four equal-width links. If you have two links, use 50%, and 33.33% for three links, etc.. */
+  text-align: center;
+  /* If you want the text to be centered */
+}
+
+/* Add a background color on mouse-over */
+.navbar2 a:hover {
+  background-color: #d7d7d7;
+  color: rgb(0, 0, 0);
+}
+
+/* Style the current/active link */
+.navbar2 a.active {
+  background-color: #d7d7d7;
+}
+
+/* Add responsiveness - on screens less than 500px, make the navigation links appear on top of each other, instead of next to each other */
+@media screen and (max-width: 500px) {
+  .navbar2 a {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    /* If you want the text to be left-aligned on small screens */
+  }
+}
+
+.text-promo {
+  color: white;
+  font-family: 'Chonburi', cursive;
+  font-weight: 500;
+}
+
+.text-promo #star-icon {
+  color: gold;
+}
+
+#travel-icon {
+  display: flex;
+  align-items: center;
+  color: #6c757d;
+}
+
+#text-price {
+  display: flex;
+
+  justify-content: center;
+  /* flex-flow: row nowrap; */
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#text-price2 {
+  display: flex;
+  /* flex-flow: row nowrap; */
+  flex-direction: row;
+  /* flex-wrap: nowrap; */
+}
+
+.hi-user {
+  color: white;
+  font-family: 'Itim', cursive;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.navbar-manage {
+  background-color: white;
+}
+
+.body-content {
+  background-color: #ffffff;
+}
+
+#content-form {
+  background-color: white;
+}
+
+.link-admin {
+  color: white;
+}
+
+.link-admin:hover {
+  color: rgb(211, 211, 211);
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #f6d365;
+  
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+  
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+  border: 2px solid white;
+  }

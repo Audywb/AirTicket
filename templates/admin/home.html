@@ -1,0 +1,94 @@
+{% extends "head.html" %}
+{% block title %}เพิ่มเที่ยวบิน{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h4 class="mt-4 text-promo"><i class="fa-solid fa-user-gear"></i> จัดการระบบ</h4>
+    <p class="text-white ms-4 px-3">ผู้ดูแลระบบ</p>
+    <hr class="text-white">
+
+    <div class="body-content">
+        <nav class="navbar-manage">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-admin-tab" data-bs-toggle="tab" data-bs-target="#nav-admin"
+                    type="button" role="tab" aria-controls="nav-admin" aria-selected="true">เพิ่มผู้ดูแลระบบ</button>
+                <button class="nav-link" id="nav-user-tab" data-bs-toggle="tab" data-bs-target="#nav-user" type="button"
+                    role="tab" aria-controls="nav-user" aria-selected="false">เพิ่มสายการบิน</button>
+                <!-- <button class="nav-link" id="nav-door-tab" data-bs-toggle="tab" data-bs-target="#nav-door" type="button"
+                role="tab" aria-controls="nav-door" aria-selected="false">Door</button> -->
+            </div>
+        </nav>
+
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-admin" role="tabpanel" aria-labelledby="nav-admin-tab">
+                <div class="mt-2 d-flex justify-content-center mt-4">
+                    <div class="col-6 mb-4">
+                        <h4>เพิ่มผู้ดูแลระบบ</h4>
+                        <form action="/admin" method="post">
+                            <div class="mb-3">
+                                <label for="username1" class="form-label">Username</label>
+                                <input type="username1" class="form-control" id="username1" name="username"
+                                    placeholder="ชื่อผู้ใช้">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" name="email" placeholder="อีเมล">
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" name="password"
+                                    placeholder="รหัสผ่าน">
+                            </div>
+                            <button type="submit" class="btn btn-danger">บันทึก</button>
+                        </form>
+                        {% if message == "success" %}
+                        <div class="alert alert-success text-center mt-4" role="alert">
+                            เพิ่ม 1 ผู้ดูแลระบบ
+                        </div>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+                <div class="mt-2 d-flex justify-content-center mt-4">
+                    <div class="col-6 mb-4">
+                        <h4>เพิ่มผู้ดูแลสายการบิน/สายการบิน</h4>
+                        <p>นำบัญชีผู้ใช้ที่เพิ่มเข้าสู่ระบบได้</p>
+                        <form action="/addAirline" method="post">
+                            <div class="mb-3">
+                                <label for="username1" class="form-label">Airline name</label>
+                                <input type="username1" class="form-control" id="username1" name="username"
+                                    placeholder="ชื่อสายการบิน">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" name="email" placeholder="อีเมล">
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" name="password"
+                                    placeholder="รหัสผ่าน">
+                            </div>
+                            <button type="submit" class="btn btn-danger">บันทึก</button>
+                        </form>
+                        {% if message == "success" %}
+                        <div class="alert alert-success text-center mt-4" role="alert">
+                            เพิ่มข้อมูลสำเร็จ
+                        </div>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "head.html" %}
+{% block title %}จัดการระบบ{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h4 class="mt-4 text-promo"><i class="fa-solid fa-user-gear"></i> จัดการเที่ยวบิน {{username}}</h4>
+    <p class="text-white ms-4 px-3">สายการบิน</p>
+    <hr class="text-white">
+
+    <div class="body-content">
+        <nav class="navbar-manage">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-admin-tab" data-bs-toggle="tab" data-bs-target="#nav-admin"
+                    type="button" role="tab" aria-controls="nav-admin" aria-selected="true">เพิ่มเที่ยวบิน</button>
+                <button class="nav-link" id="nav-user-tab" data-bs-toggle="tab" data-bs-target="#nav-user" type="button"
+                    role="tab" aria-controls="nav-user" aria-selected="false">ผู้โดยสาร</button>
+                <!-- <button class="nav-link" id="nav-door-tab" data-bs-toggle="tab" data-bs-target="#nav-door" type="button"
+                role="tab" aria-controls="nav-door" aria-selected="false">Door</button> -->
+            </div>
+        </nav>
+
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-admin" role="tabpanel" aria-labelledby="nav-admin-tab">
+                <div class="mt-2 d-flex justify-content-center mt-4">
+                    <div class="col-6 mb-4">
+                        <h4>เพิ่มเที่ยวบินแนะนำ</h4>
+                        <form action="/airline" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Airline name</label>
+                                <input type="text" class="form-control" id="username" name="name"
+                                    placeholder="ชื่อสายการบิน" value={{username}} required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="start" class="form-label">Start</label>
+                                <input type="text" class="form-control" id="start" name="start" placeholder="ต้นทาง"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="end" class="form-label">Destination</label>
+                                <input type="text" class="form-control" id="end" name="end" placeholder="ปลายทาง"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="price" class="form-label">Price</label>
+                                <input type="number" class="form-control" id="price" name="price" placeholder="ราคา"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="time" class="form-label">Time to fly/hour</label>
+                                <input type="number" class="form-control" id="time" name="time"
+                                    placeholder="เวลาในการบิน/ชั่วโมง" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="flightdate" class="form-label">Flight date(วันที่เครื่องขึ้น)</label>
+                                <input type="date" class="form-control" id="flightdate" name="flightdate"
+                                    placeholder="เครื่องขึ้นวันที่" value={{date}} min={{now}} max="2025-06-14T00:00"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="flighttime" class="form-label">Flight time(เวลาเครื่องขึ้น)</label>
+                                <input type="time" class="form-control timePicker" id="flighttime" name="flighttime"
+                                    placeholder="เครื่องขึ้นเวลา" value={{date}} required>
+                            </div>
+
+                            <button type="submit" class="btn btn-danger">บันทึก</button>
+                        </form>
+                        {% if message == "success" %}
+                        <div class="alert alert-success text-center mt-4" role="alert">
+                            เพิ่มข้อมูลสำเร็จ
+                        </div>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+                <div class="mt-2 d-flex justify-content-center mt-4">
+                    <div class="col-6 mb-4">
+                        <h4>ตรวจสอบสถานะผู้โดยสาร {{username}}</h4>
+                        {% for ticket in tickets %}
+                        <ul class="list-group mb-2">
+                            <li class="list-group-item list-group-item-primary">หมายเลขการจอง: {{ ticket['ticket_no'] }}</li>
+                            <li class="list-group-item list-group-item-warning">ชื่อผู้โดยสาร: {{ ticket['name'] }}</li>
+                            <li class="list-group-item list-group-item-warning">เบอร์มือถือ: {{ ticket['phone'] }}</li>
+                            <li class="list-group-item list-group-item-warning">อีเมล: {{ ticket['email'] }}</li>
+                            <li class="list-group-item list-group-item-warning">สายการบิน: {{ ticket['airline'] }}</li>
+                            <li class="list-group-item list-group-item-warning">เวลาขึ้นเครื่อง: {{ ticket['flight_time'].strftime('%d-%m-%Y, %H:%M') }}</li>
+                        </ul>
+                        <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
