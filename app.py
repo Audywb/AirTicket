@@ -64,7 +64,10 @@ def login_is_required_airline(function):
             return render_template('login.html', warning=warning)
         elif session["is_user"] != "airline":
             warning = "กรุณาเข้าสู่ระบบ ด้วยบัญชีผู้ดูแลสายการบิน"
-            return render_template('login.html', warning=warning)
+            if session["is_user"] == "admin":
+                return function()
+            else:
+                return render_template('login.html', warning=warning)
         else:
             return function()
     wrapper.__name__ = function.__name__
