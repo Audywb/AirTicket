@@ -4,6 +4,22 @@
 {% block content %}
 <div class="container-fluid">
     <h4 class="mt-4 text-promo"><i class="fa-solid fa-plane" id="star-icon"></i> จองตั๋วเที่ยวบิน</h4>
+    <form method="POST" action="{{ url_for('ticket_order_date') }}">
+        <div class="mb-3 mt-3 row">
+            <label for="calendar" class="form-label text-white fs-5 col-12">วันที่ออกเดินทาง</label>
+            <div class="col-lg-3 col-sm-10">
+                {% if date %}
+                <input type="date" class="form-control" id="calendar" placeholder="วันที่ออกเดินทาง" name="calendar" value={{date}}>
+                {% else %}
+                <input type="date" class="form-control" id="calendar" placeholder="วันที่ออกเดินทาง" name="calendar">
+                {% endif %}
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-danger col-auto" type="submit">ตกลง</button>
+            </div>
+        </div>
+    </form>
+    {% if flights %}
     {% for flight in flights%}
     <div class="card mt-2">
         <h5 class="card-header border-danger">เที่ยวบินแนะนำ</h5>
@@ -47,7 +63,8 @@
             </div>
             <div class="text-center">
                 <div class="col">
-                    <a href="{{ url_for('ticeketSelect', id=flight['_id']) }}" class="btn btn-danger">เลือกเที่ยวบินนี้</a>
+                    <a href="{{ url_for('ticeketSelect', id=flight['_id']) }}"
+                        class="btn btn-danger">เลือกเที่ยวบินนี้</a>
                 </div>
             </div>
         </div>
@@ -56,6 +73,8 @@
         </div>
     </div>
     {% endfor %}
+    {% else %}
+    {% endif %}
     <br>
 </div>
 {% endblock %}

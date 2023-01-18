@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, request, url_for, flash, session
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
 import pathlib
@@ -100,8 +100,22 @@ def ticket():
         name = session['name']
     else:
         name = "not_login"
-    all_flight = flights.find()
-    return render_template('ticket.html', username=name, flights=all_flight)
+    return render_template('ticket.html', username=name)
+
+@app.route("/ticeket/select/date", methods=['GET', 'POST'])
+def ticket_order_date():
+    if "name" in session:
+        name = session['name']
+    else:
+        name = "not_login"
+    to_date = request.form['calendar']
+    start_date = datetime.strptime(to_date, '%Y-%m-%d')
+    end_date = start_date + timedelta(days = 1)
+    print(start_date, type(start_date))
+    print(end_date, type(end_date))
+    all_flight = flights.find({"flight_date": {'$lt': end_date, '$gte': start_date}})
+    return render_template('ticket.html', username=name, flights=all_flight, date=start_date)
+
 
 
 @app.route("/ticeketSelect/<id>", methods=['GET', 'POST'])
